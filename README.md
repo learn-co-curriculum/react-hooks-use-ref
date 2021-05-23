@@ -1,6 +1,10 @@
 # The useRef Hook
 
-## Overview
+- Understand common use cases for the `useRef` hook
+- Use the `useRef` hook to access DOM elements
+- Use the `useRef` hook to persist data across multiple component renders
+
+## Introduction
 
 In this lesson, we'll explore how to use the `useRef` hook and some common use
 cases for it. You can find starter code with the examples we'll discuss in the
@@ -33,9 +37,9 @@ function CounterState() {
 }
 ```
 
-In this example, we create a **state variable** called `count` that we can
-access the value of every time our component re-renders. Also, **calling
-`setCount` will trigger a re-render**.
+In this example, we use the `useState` hook to create some new internal state
+within React that we can access using the `count` variable every time our
+component re-renders. Also, **calling `setCount` will trigger a re-render**.
 
 Using a ref instead, our component would look like this:
 
@@ -63,15 +67,17 @@ To break down the code:
 
 - We must first import the `useRef` hook, just like with the other hooks we've
   seen
-- We call `useRef` and pass in an initial value for the ref
-- Calling `useRef` returns a **ref variable**, which is an **object** with just
-  one key: `current`. It looks like this: `{ current: 0 }`
-- To update the value of the ref, we update its `current` property:
-  `count.current = count.current + 1`
+- We call `useRef` and pass in an initial value
+- Calling `useRef` creates a new internal value in React and gives us access to
+  that value in a **ref variable**, which is an **object** with just one key:
+  `current`. It looks like this: `{ current: 0 }`
+- To update the value of the ref in React's internals, we update its `current`
+  property: `count.current = count.current + 1`
 
 The key difference between these approaches is that in the `useRef` example,
-updating the ref variable **does not cause our component to re-render**. It
-still allows us to have a variable that persists between renders of our
+updating the ref variable **does not cause our component to re-render**.
+
+It still allows us to have a variable that persists between renders of our
 component, but since updating its value does't trigger a re-render, we use it in
 different situations than when we'd use `useState`. You can think of this ref
 variable almost like an **instance variable** for your function components.
@@ -140,7 +146,8 @@ We still need of persisting the previous price. This is where we can use the
 - Access the same data across renders
 - Not re-render the component when saving this data
 
-`useRef` is a good tool for the job. Here's how we'd use it:
+`useRef` is a good tool for the job of storing the previous price. Here's how
+we'd use it:
 
 ```js
 import React, { useEffect, useRef, useState } from "react";
@@ -155,9 +162,6 @@ function Ticker() {
   useEffect(() => {
     // use the current value of the ref
     const prevPrice = prevPriceRef.current;
-
-    console.log({ price, prevPrice });
-
     if (price > prevPrice) {
       setColor("green");
     } else if (price < prevPrice) {
@@ -171,10 +175,10 @@ function Ticker() {
 
   useEffect(() => {
     const id = setInterval(() => setPrice(makeRandomNumber), 1000);
-    return function () {
+    return function cleanup() {
       clearInterval(id);
     };
-  }, [price]);
+  }, []);
 
   return (
     <div>
@@ -191,8 +195,8 @@ change over time.
 
 ## Accessing DOM Elements
 
-One common use case for the `useRef` hook is to gain access to the actual DOM
-elements being created by our React components. In general, we want to give
+Another common use case for the `useRef` hook is to gain access to the actual
+DOM elements being created by our React components. In general, we want to give
 React control over the DOM based on the JSX that is returned by our components.
 However, sometimes it is also useful to gain access to the actual DOM elements
 for a few uses outside of the React rendering cycle, such as:
@@ -218,7 +222,8 @@ function Box() {
 }
 ```
 
-Then, we can attach the ref to a DOM element by adding a special `ref` attribute to our JSX:
+Then, we can attach the ref to a DOM element by adding a special `ref` attribute
+to our JSX element:
 
 ```js
 function Box() {
@@ -259,13 +264,14 @@ to draw out a graph of the price changes over time.
 
 ## Conclusion
 
-Like `useState`, the `useRef` hooks gives us a variable that will persist across
-renders of our component. Unlike a **state variable**, when we update a **ref
-variable**, React will not automatically re-render our component. This makes
-refs useful for keeping track of persistent data in our components, similar to
-an instance variable.
+Like `useState`, the `useRef` hooks gives us a some internal React values that
+will persist across renders of our component. Unlike **state**, when we update a
+**ref**, React will not automatically re-render our component. This makes refs
+useful for keeping track of persistent data in our components, similar to an
+instance variable.
 
-A **ref variable** can also be used to gain access to DOM elements.
+A **ref variable** can also be used to gain access to DOM elements using the
+`ref` prop on a JSX element.
 
 ## Resources
 

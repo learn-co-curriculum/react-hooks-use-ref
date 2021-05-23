@@ -10,7 +10,7 @@ function Ticker() {
     return function () {
       clearInterval(id);
     };
-  }, [price]);
+  }, []);
 
   return (
     <div>
