@@ -18,7 +18,7 @@ accessible across multiple renders of our component. In some ways, it's similar
 to the `useState` hook: the `useState` hook also lets us keep track of values
 across multiple renders of our component, like this:
 
-```js
+```jsx
 import React, { useState } from "react";
 
 function CounterState() {
@@ -43,7 +43,7 @@ component re-renders. Also, **calling `setCount` will trigger a re-render**.
 
 Using a ref instead, our component would look like this:
 
-```js
+```jsx
 import React, { useRef } from "react";
 
 function CounterRef() {
@@ -97,7 +97,7 @@ Let's build out a price tracking component. The features of this component are:
 Here's some starter code that implements the first feature of generating a
 random price each second:
 
-```js
+```jsx
 import React, { useEffect, useState } from "react";
 import { makeRandomNumber } from "../utils";
 
@@ -127,7 +127,7 @@ previous render and the current render. Since we want to change the color based
 on the price, we can start off by writing out a side effect with the price as
 the dependency:
 
-```js
+```jsx
 useEffect(() => {
   // we need some way to get the prevPrice...
   if (price > prevPrice) {
@@ -149,7 +149,7 @@ We still need of persisting the previous price. This is where we can use the
 `useRef` is a good tool for the job of storing the previous price. Here's how
 we'd use it:
 
-```js
+```jsx
 import React, { useEffect, useRef, useState } from "react";
 import { makeRandomNumber } from "../utils";
 
@@ -209,7 +209,7 @@ for a few uses outside of the React rendering cycle, such as:
 
 To use a ref on a DOM element, we first create the ref using the `useRef` hook, just like before:
 
-```js
+```jsx
 function Box() {
   const elementRef = useRef();
 
@@ -225,7 +225,7 @@ function Box() {
 Then, we can attach the ref to a DOM element by adding a special `ref` attribute
 to our JSX element:
 
-```js
+```jsx
 function Box() {
   const elementRef = useRef();
 
@@ -240,7 +240,7 @@ function Box() {
 
 Now, we can access information about that DOM element in our component:
 
-```js
+```jsx
 function Box() {
   const elementRef = useRef();
 
