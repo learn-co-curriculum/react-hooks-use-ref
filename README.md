@@ -1,5 +1,7 @@
 # The useRef Hook
 
+## Learning Goals
+
 - Understand common use cases for the `useRef` hook
 - Use the `useRef` hook to access DOM elements
 - Use the `useRef` hook to persist data across multiple component renders
