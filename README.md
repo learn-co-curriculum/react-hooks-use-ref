@@ -77,11 +77,12 @@ To break down the code:
   property: `count.current = count.current + 1`
 
 The key difference between these approaches is that in the `useRef` example,
-updating the ref variable **does not cause our component to re-render**.
+updating the ref variable **does not cause our component to re-render**. Try out
+both buttons in the browser to see the difference.
 
-It still allows us to have a variable that persists between renders of our
-component, but since updating its value does't trigger a re-render, we use it in
-different situations than when we'd use `useState`. You can think of this ref
+`useRef` still allows us to have a variable that persists between renders of our
+component, but since updating its value doesn't trigger a re-render, we use it
+in different situations than when we'd use `useState`. You can think of this ref
 variable almost like an **instance variable** for your function components.
 
 Let's see some good use cases for the `useRef` hook.
@@ -142,8 +143,8 @@ useEffect(() => {
 }, [price]);
 ```
 
-We still need of persisting the previous price. This is where we can use the
-`useRef` hook! Since our goal is to:
+To make this work, we need to persist the previous price. This is where we can
+use the `useRef` hook! Since our goal is to:
 
 - Access the same data across renders
 - Not re-render the component when saving this data
@@ -261,12 +262,13 @@ function Box() {
 ```
 
 Another example of using the `useRef` hook to access a DOM element is in the
-`TickerChart` component. In that example, we're using a `<canvas>` element
-to draw out a graph of the price changes over time.
+`TickerChart` component included in the `src/components` directory. In that
+example, we're using a `<canvas>` element to draw out a graph of the price
+changes over time.
 
 ## Conclusion
 
-Like `useState`, the `useRef` hooks gives us a some internal React values that
+Like `useState`, the `useRef` hook gives us some internal React values that
 will persist across renders of our component. Unlike **state**, when we update a
 **ref**, React will not automatically re-render our component. This makes refs
 useful for keeping track of persistent data in our components, similar to an
