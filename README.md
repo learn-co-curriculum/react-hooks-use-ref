@@ -210,7 +210,8 @@ for a few uses outside of the React rendering cycle, such as:
 - measuring the size of a DOM element
 - working with a `<canvas>` or `<video>` element
 
-To use a ref on a DOM element, we first create the ref using the `useRef` hook, just like before:
+To use a ref on a DOM element, we first create the ref using the `useRef` hook,
+just like before:
 
 ```jsx
 function Box() {
